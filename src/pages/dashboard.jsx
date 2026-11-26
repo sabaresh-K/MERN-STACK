@@ -1,19 +1,19 @@
-import { useLocation } from "react-router-dom";
 import { useState } from "react";
-function Dashboard() {
-       const Location=useLocation()
-       const[userdata,setUserdata]=useState("   ")
-       function displayData()
-       {
-              setUserdata(Location.state)
-              console.log(userdata)
-       }
-   return (
-       <>
-       <button onClick={displayData}>button</button>
-       </>
-   )
+import { useLocation } from "react-router-dom";
 
+function Dashboard() {
+    const location = useLocation();
+    const[userdata, setUserdata] = useState("");
+    function displaydata(){
+        setUserdata(location.state);
+        console.log(userdata)
+    }    
+
+    return ( 
+        <>
+            <button onClick={displaydata}>button</button>
+        </>
+     );
 }
 
 export default Dashboard;

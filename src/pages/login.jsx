@@ -1,42 +1,50 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function LoginU() {
-const[username,setEmail]=useState("");
-const[password,setPassword]=useState("");
-const[Formdata,setFormdata]=useState({
-    username:" ",
-    password:" "
-})
-const Navigate=useNavigate()
-function handlechange(e)
-{
-    e.preventDefault(),
-    setFormdata({
-    ...Formdata,
-    [e.target.name]:e.target.value
-})
-}
-const formsubmit = (e) => {
+
+function Login() {
+  //const[email, setEmail] = useState("")
+  //const[pass, setPass] = useState("")
+  const navigate = useNavigate();
+  const[formdata, setFormdata] = useState({
+    username:"",
+    password:""
+  })
+
+  function handlechange(e){
     e.preventDefault();
-    Navigate("/dashboard")
-    alert("login successful")
-    console.log(Formdata);
-};
-return (
+    setFormdata({
+      ...formdata,
+      [e.target.name]:e.target.value
+    })
+  }
 
-<>
-    <form onSubmit={formsubmit} className="form">
-    <input type="text" className="username" placeholder="Enter your email"  name="username" required  onChange={handlechange} />
-    <p></p>
-    <input type="password" className="password" placeholder="Enter your password"  name="password" required  onChange={handlechange}/>
-    <p>
-    </p>
-    <button type="submit" className="btn">Submit</button>
-    </form>
-
+  const handlesubmit = (event)=>{
+    event.preventDefault();
+    console.log("login page",formdata)
+    alert("Login sucessfull")
+    navigate("/dashboard",{
+      state:formdata
+    })
+  }
+    return ( 
+    <>
+      <div>Login</div>
+      {/*}
+      <input type="email" required placeholder="Enter your email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+      <input type="password" required placeholder="Enter your password" value={pass} onChange={(e)=>{setPass(e.target.value)} }/>
+      <button type="submit" onClick={()=>console.log(email,pass)}>Submit</button>
+      <button type="submit" onClick={()=>print()}>Submit</button>
+      */}
+      
+      <form onSubmit={handlesubmit}>
+        <input type="text" required placeholder="Enter your username" name="username" value={formdata.username} onChange={handlechange}/>
+        <input type="password" required placeholder="Enter your password" name="password" onChange={handlechange }/>
+        <button type="submit" >Submit</button>
+      </form>
     </>
-)
+    
+     );
 }
 
-export default LoginU
+export default Login;
