@@ -1,35 +1,55 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
 
 function Login() {
   //const[email, setEmail] = useState("")
   //const[pass, setPass] = useState("")
-  const navigate = useNavigate();
-  const[formdata, setFormdata] = useState({
+  const Navigate = useNavigate();
+const location=useLocation()
+  const[Logindata, setLogindata] = useState({
     username:"",
     password:""
   })
-
+ const registerdata=location.state
   function handlechange(e){
     e.preventDefault();
-    setFormdata({
-      ...formdata,
+    setLogindata({
+      ...Logindata,
       [e.target.name]:e.target.value
     })
   }
 
   const handlesubmit = (event)=>{
     event.preventDefault();
-    console.log("login page",formdata)
-    alert("Login sucessfull")
-    navigate("/dashboard",{
-      state:formdata
-    })
+   
+  console.log(registerdata)
+  console.log(Logindata)
+  if(registerdata.name===Logindata.username && registerdata.password===Logindata.password)
+  {
+    alert ("Login Successful")
+    Navigate("/dashboard",
+    {
+      state:Logindata
+    }
+    
+   ) }
+    else{
+      alert("please enter the valid credential")
+    }
   }
     return ( 
     <>
-      <div>Login</div>
+      <div className="min-h-screen bg-amber-50 flex flex-col items-center justify-center px-4 py-8">
+        <div className="text-5xl text-center py-8">Login</div>
+        <form  className="border-2 gap-3 bg-cyan-100 flex flex-col  ml-2 py-2 my-2"onSubmit={handlesubmit}>
+          <div className="text-2xl">UserName:</div>
+        <input type="text" required placeholder="Enter your username" name="username" value={Logindata.username} onChange={handlechange}/>
+        <div>Password:</div>
+        <input type="password" required placeholder="Enter your password" name="password" onChange={handlechange }/>
+        <button type="submit" >Submit</button>
+      </form>
+      </div>
       {/*}
       <input type="email" required placeholder="Enter your email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
       <input type="password" required placeholder="Enter your password" value={pass} onChange={(e)=>{setPass(e.target.value)} }/>
@@ -37,11 +57,7 @@ function Login() {
       <button type="submit" onClick={()=>print()}>Submit</button>
       */}
       
-      <form onSubmit={handlesubmit}>
-        <input type="text" required placeholder="Enter your username" name="username" value={formdata.username} onChange={handlechange}/>
-        <input type="password" required placeholder="Enter your password" name="password" onChange={handlechange }/>
-        <button type="submit" >Submit</button>
-      </form>
+      
     </>
     
      );
