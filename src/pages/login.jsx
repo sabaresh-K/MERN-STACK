@@ -42,12 +42,12 @@ const location=useLocation()
     <>
       <div className="min-h-screen bg-amber-50 flex flex-col items-center justify-center px-4 py-8">
         <div className="text-5xl text-center py-8">Login</div>
-        <form  className="border-2 gap-3 bg-cyan-100 flex flex-col  ml-2 py-2 my-2"onSubmit={handlesubmit}>
+        <form  className="border-2 gap-4  bg-cyan-100 flex flex-col  ml-2 py-2 p-4 "onSubmit={handlesubmit}>
           <div className="text-2xl">UserName:</div>
-        <input type="text" required placeholder="Enter your username" name="username" value={Logindata.username} onChange={handlechange}/>
-        <div>Password:</div>
-        <input type="password" required placeholder="Enter your password" name="password" onChange={handlechange }/>
-        <button type="submit" >Submit</button>
+        <input  className="bg-white border-2 border-black" type="text" required placeholder="Enter your username" name="username" value={Logindata.username} onChange={handlechange}/>
+        <div className="text-2xl">Password:</div>
+        <input className="bg-white border-2 border-black" type="password" required placeholder="Enter your password" name="password" onChange={handlechange }/>
+        <button  className="bg-green-400 rounded-3xl" type="submit" >Submit</button>
       </form>
       </div>
       {/*}
